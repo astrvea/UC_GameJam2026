@@ -11,21 +11,48 @@ public class ShadowTime : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.P) && ShadowGo == false)
+        if (Input.GetKeyDown(KeyCode.Q) && ShadowGo == false)
 
         {
-            ShadowGo = true;
+            StartCoroutine(swappin());
+
+            //ShadowGo = true;
             camSwap.hasMoved = false;
         }
 
-        if (Input.GetKey(KeyCode.Q) && ShadowGo == true)
+        if (Input.GetKeyDown(KeyCode.Q) && ShadowGo == true)
 
         {
+
+            StartCoroutine(swapBack());
 
             ShadowGo = false;
             camSwap.hasMoved = false;
         }
 
+ 
 
+
+    }
+
+    public IEnumerator swappin()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        if (ShadowGo == false)
+        {
+            ShadowGo = true;
+        }
+
+
+    }
+
+    public IEnumerator swapBack() 
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (ShadowGo == true) 
+        {
+            ShadowGo = false;
+        }
     }
 }
