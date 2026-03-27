@@ -30,6 +30,9 @@ public class CameraSwap : MonoBehaviour
 
     public bool hasMoved = false;
 
+    public GrabItem grabber;
+
+    public GameObject itemShadow;
     
 
     public void Start()
@@ -80,6 +83,13 @@ public class CameraSwap : MonoBehaviour
             vCamera.Follow = myShadow.transform;
             vCamera.LookAt = myShadow.transform;
 
+            if (grabber.isGrabbed == true) 
+            {
+
+                itemShadow.SetActive(true);
+
+            }
+
             
         }
 
@@ -87,7 +97,7 @@ public class CameraSwap : MonoBehaviour
         {
 
             //Camera.main.transform.rotation = Quaternion.Euler(30, 45, 0);
-            
+
             //Camera.main.transform.position = OrgStart;
             //vCamera.transform.position = OrgStart;
 
@@ -102,6 +112,13 @@ public class CameraSwap : MonoBehaviour
 
             vCamera.Follow = null;
             vCamera.LookAt = null;
+
+           
+                itemShadow.SetActive(false);
+            
+
+
+
         }
 
 
