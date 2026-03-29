@@ -22,6 +22,22 @@ public class PlayerGrabNew : MonoBehaviour
             Debug.Log("wassup");
             checkRaycast();
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (grabbedObj)
+            {
+                dropObject();
+            }
+        }
+        moveGrabbed();
+    }
+
+    void moveGrabbed()
+    {
+        if (grabbedObj)
+        {
+            grabbedObj.transform.position = grabArea.position;
+        }
     }
 
     void checkRaycast()
@@ -81,17 +97,21 @@ public class PlayerGrabNew : MonoBehaviour
         if (grabbedObj)
         {
             // swap the objects
-            grabbedObj.transform.SetParent(null);
+            grabbedObj.transform.position = obj.transform.position;
             grabbedObj = obj;
-            grabbedObj.transform.SetParent(grabArea);
-            grabbedObj.transform.localPosition = Vector3.zero;
+            grabbedObj.transform.position = grabArea.position;
         }
         else
         {
             // set the grabbed object
             grabbedObj = obj;
-            grabbedObj.transform.SetParent(grabArea);
-            grabbedObj.transform.localPosition = Vector3.zero;
+            grabbedObj.transform.position = grabArea.position;
         }
+    }
+
+    void dropObject()
+    {
+        // drop the object by setting grabbedObj to null
+        grabbedObj = null;
     }
 }
