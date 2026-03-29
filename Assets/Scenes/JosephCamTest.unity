@@ -460,6 +460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerGrabPos: {fileID: 336422788}
   item: {fileID: 1283789659}
+  itemShadow: {fileID: 0}
+  grabbedItem: {fileID: 0}
   isGrabbed: 0
 --- !u!1 &261802086
 GameObject:
@@ -1028,6 +1030,7 @@ GameObject:
   - component: {fileID: 1139590028}
   - component: {fileID: 1139590027}
   - component: {fileID: 1139590033}
+  - component: {fileID: 1139590034}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -1155,7 +1158,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139590026}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57e20310378314242be2561816d9f514, type: 3}
   m_Name: 
@@ -1163,6 +1166,25 @@ MonoBehaviour:
   _speed: 5
   _rb: {fileID: 1139590027}
   St: {fileID: 82905304}
+--- !u!114 &1139590034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139590026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f229daef133ec5f42b350f5fc08a313b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bunny: {fileID: 1139590026}
+  brb: {fileID: 1139590027}
+  moveSpeed: 5
+  moveInput: {x: 0, y: 0}
+  accelRate: 5
+  decelRate: 5
+  targetSpeed: 5
 --- !u!1 &1221082980
 GameObject:
   m_ObjectHideFlags: 0
