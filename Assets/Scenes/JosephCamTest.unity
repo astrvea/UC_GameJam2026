@@ -180,35 +180,13 @@ GameObject:
   - component: {fileID: 133484206}
   - component: {fileID: 133484205}
   - component: {fileID: 133484204}
-  - component: {fileID: 133484203}
   m_Layer: 0
   m_Name: ShadowFloor1
-  m_TagString: Untagged
+  m_TagString: shadowFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &133484203
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133484202}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.99999994, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &133484204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -460,6 +438,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerGrabPos: {fileID: 336422788}
   item: {fileID: 1283789659}
+  itemShadow: {fileID: 0}
+  grabbedItem: {fileID: 0}
   isGrabbed: 0
 --- !u!1 &261802086
 GameObject:
@@ -1027,7 +1007,7 @@ GameObject:
   - component: {fileID: 1139590030}
   - component: {fileID: 1139590028}
   - component: {fileID: 1139590027}
-  - component: {fileID: 1139590033}
+  - component: {fileID: 1139590034}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -1145,10 +1125,11 @@ Transform:
   m_LocalPosition: {x: -1.111, y: 5.1, z: -8.373}
   m_LocalScale: {x: 0.12, y: 1, z: 0.12}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1569591964}
   m_Father: {fileID: 261802087}
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
---- !u!114 &1139590033
+--- !u!114 &1139590034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1157,12 +1138,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1139590026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e20310378314242be2561816d9f514, type: 3}
+  m_Script: {fileID: 11500000, guid: f229daef133ec5f42b350f5fc08a313b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _rb: {fileID: 1139590027}
-  St: {fileID: 82905304}
+  bunny: {fileID: 1139590026}
+  brb: {fileID: 1139590027}
+  moveSpeed: 7
+  moveInput: {x: 0, y: 0}
+  accelRate: 5
+  decelRate: 5
+  targetSpeed: 5
+  canJump: 0
+  isJumping: 0
+  jumpTime: 0.35
+  jumpReset: 0
+  jumpForce: 400
+  jumpCutForce: 5
+  coyoteTime: 0.05
+  coyoteTimeReset: 0
+  groundCheck: {fileID: 1569591965}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  st: {fileID: 82905304}
 --- !u!1 &1221082980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,6 +1555,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1221082981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1569591963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569591964}
+  - component: {fileID: 1569591965}
+  - component: {fileID: 1569591966}
+  m_Layer: 0
+  m_Name: groundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1569591964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569591963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1139590032}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1569591965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569591963}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.870591, y: 0.14165497, z: 1.3449708}
+  m_Center: {x: -0.14460982, y: -0.033283234, z: -0.073077224}
+--- !u!114 &1569591966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569591963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b3752a91cf59a40bb2752230ab5051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 1569591963}
+  bm: {fileID: 1139590034}
+  startCoyotetime: 0
 --- !u!1 &1569790985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1639,7 @@ GameObject:
   - component: {fileID: 1569790986}
   m_Layer: 0
   m_Name: ShadowFloor2
-  m_TagString: Untagged
+  m_TagString: shadowFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
