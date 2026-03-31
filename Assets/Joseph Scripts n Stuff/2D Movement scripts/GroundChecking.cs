@@ -10,6 +10,8 @@ public class GroundChecking : MonoBehaviour
     public BunnyMovement bm;
 
     public bool startCoyotetime;
+
+    public Animator animController;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,9 @@ public class GroundChecking : MonoBehaviour
             bm.jumpTime = bm.jumpReset;
             bm.coyoteTime = bm.coyoteTimeReset;
             startCoyotetime = false;
+            bm.isBonked = false;
+            bm.isGrounded = true;
+            //bm.animControl.SetBool("isFalling", false);
         }
     }
 
@@ -49,6 +54,7 @@ public class GroundChecking : MonoBehaviour
         if (other.CompareTag("shadowFloor")) 
         {
             startCoyotetime = true;
+            bm.isGrounded = false;
         }
     }
 }
