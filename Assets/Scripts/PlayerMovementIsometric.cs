@@ -7,18 +7,23 @@ public class PlayerMovementIsometric : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed = 5;
     [SerializeField] private float rotationSpeed = 720;
+    [SerializeField] private float climbSpeed = 3;
     private Vector3 playerInput;
+    private bool isClimbing;
+    private Vector3 climbPos;
+    private GameObject climbingObject;
     public ShadowTime St;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        isClimbing = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(St.ShadowGo == false){
+        if(St.ShadowGo == false && !isClimbing){
             GatherInput();
             Look();
         }
@@ -26,7 +31,11 @@ public class PlayerMovementIsometric : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        if(!isClimbing){
+            Move();
+        }else{
+            MoveClimb();
+        }
     }
 
     void GatherInput()
@@ -50,5 +59,52 @@ public class PlayerMovementIsometric : MonoBehaviour
     void Move()
     {
         rb.MovePosition(transform.position + (transform.forward * playerInput.magnitude) * speed * Time.deltaTime);
+    }
+
+    void MoveClimb()
+    {
+        Vector3 climbingInput = new Vector3(0, Input.GetAxisRaw("Vertical"), 0);
+        Debug.Log(climbingInput);
+        Vector3 pos = transform.position;
+        pos.x = climbingObject.transform.position.x;
+        pos.z = climbingObject.transform.position.z;
+        pos.y += climbingInput.y * Time.deltaTime * climbSpeed;
+
+        Collider col = climbingObject.GetComponent<Collider>();
+
+        if (pos.y <= col.bounds.min.y)
+        {
+            ExitClimb();
+            return;
+        }
+
+        transform.position = pos;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Climbable"))
+        {
+            isClimbing = true;
+            climbPos = transform.position;
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+            climbingObject = other.gameObject;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Climbable"))
+        {
+            ExitClimb();
+        }
+    }
+
+    void ExitClimb()
+    {
+        isClimbing = false;
+        rb.isKinematic = false;
+        climbingObject = null;
     }
 }

@@ -7,6 +7,8 @@ TagManager:
   - shadowFloor
   - shadowCeiling
   - shadowWall
+  - CinemachineTarget
+  - Climbable
   layers:
   - Default
   - TransparentFX
