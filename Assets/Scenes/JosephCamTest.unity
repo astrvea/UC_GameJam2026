@@ -1349,7 +1349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bunny: {fileID: 556172465}
   brb: {fileID: 556172467}
-  moveSpeed: 5
+  moveSpeed: 6
   moveInput: {x: 0, y: 0}
   accelRate: 5
   decelRate: 5
@@ -1359,7 +1359,7 @@ MonoBehaviour:
   jumpTime: 0.35
   jumpReset: 0
   jumpForce: 400
-  jumpCutForce: 5
+  jumpCutForce: 3
   coyoteTime: 0.05
   coyoteTimeReset: 0.05
   groundCheck: {fileID: 0}
