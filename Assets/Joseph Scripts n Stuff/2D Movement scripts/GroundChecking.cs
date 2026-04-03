@@ -12,6 +12,12 @@ public class GroundChecking : MonoBehaviour
     public bool startCoyotetime;
 
     public Animator animController;
+
+    public LowerLadder lad;
+
+    public Rigidbody bnuuy;
+
+    public float bounceForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +53,18 @@ public class GroundChecking : MonoBehaviour
             bm.isGrounded = true;
             //bm.animControl.SetBool("isFalling", false);
         }
+
+        if (other.CompareTag("Ladder")) 
+        {
+            lad.ladderPushed = true;
+        }
+
+        if (other.CompareTag("Bouncy")) 
+        {
+
+            bnuuy.AddForce(0, bounceForce, 0, ForceMode.Impulse);
+
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -57,4 +75,6 @@ public class GroundChecking : MonoBehaviour
             bm.isGrounded = false;
         }
     }
+
+    
 }

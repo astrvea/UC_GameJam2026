@@ -9,6 +9,8 @@ TagManager:
   - shadowWall
   - CinemachineTarget
   - Climbable
+  - Ladder
+  - Bouncy
   layers:
   - Default
   - TransparentFX

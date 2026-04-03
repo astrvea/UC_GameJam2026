@@ -33,6 +33,8 @@ public class CameraSwap : MonoBehaviour
     public GrabItem grabber;
 
     public GameObject itemShadow;
+
+    public GameObject player;
     
 
     public void Start()
@@ -110,8 +112,8 @@ public class CameraSwap : MonoBehaviour
             vCamera.transform.rotation = Quaternion.RotateTowards(transform.rotation, orgRot, rotSpeed * Time.deltaTime);
             Camera.main.orthographic = true;
 
-            vCamera.Follow = null;
-            vCamera.LookAt = null;
+            vCamera.Follow = player.transform;
+            vCamera.LookAt = player.transform;
 
            
                 itemShadow.SetActive(false);
