@@ -23,6 +23,7 @@ public class PlayerMovementIsometric : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkIfGrounded();
         if(St.ShadowGo == false && !isClimbing){
             GatherInput();
             Look();
@@ -66,8 +67,8 @@ public class PlayerMovementIsometric : MonoBehaviour
         Vector3 climbingInput = new Vector3(0, Input.GetAxisRaw("Vertical"), 0);
         Debug.Log(climbingInput);
         Vector3 pos = transform.position;
-        pos.x = climbingObject.transform.position.x;
-        pos.z = climbingObject.transform.position.z;
+        pos.x = transform.position.x;
+        pos.z = transform.position.z;
         pos.y += climbingInput.y * Time.deltaTime * climbSpeed;
 
         Collider col = climbingObject.GetComponent<Collider>();
@@ -98,6 +99,18 @@ public class PlayerMovementIsometric : MonoBehaviour
         if (other.CompareTag("Climbable"))
         {
             ExitClimb();
+        }
+    }
+
+    void checkIfGrounded()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f))
+        {
+            if (hit.collider.CompareTag("shadowFloor"))
+            {
+                Debug.Log("Player is grounded");
+                ExitClimb();
+            }
         }
     }
 
