@@ -631,8 +631,6 @@ MonoBehaviour:
   pages:
   - {fileID: 1941714158}
   - {fileID: 1987623292}
-  - {fileID: 0}
-  - {fileID: 0}
   rightButton: {fileID: 948638329}
   leftButton: {fileID: 1824931844}
 --- !u!4 &1156961188
