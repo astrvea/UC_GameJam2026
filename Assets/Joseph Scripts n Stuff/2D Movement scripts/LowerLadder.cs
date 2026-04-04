@@ -45,4 +45,15 @@ public class LowerLadder : MonoBehaviour
             ladderRb.isKinematic = false;
         }
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("LadderEnd")) 
+        {
+            ladderRb.useGravity = false;
+            ladderRb.isKinematic = false;
+            colliderBoxes.SetActive(false);
+            ladderRb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
 }
