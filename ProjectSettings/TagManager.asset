@@ -12,6 +12,7 @@ TagManager:
   - Ladder
   - Bouncy
   - MacGuffin
+  - LadderEnd
   layers:
   - Default
   - TransparentFX
