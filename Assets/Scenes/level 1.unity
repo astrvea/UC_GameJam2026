@@ -790,7 +790,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1871611496}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1531,6 +1531,11 @@ PrefabInstance:
       propertyPath: myPlay
       value: 
       objectReference: {fileID: 1785365329}
+    - target: {fileID: 8880859635586490934, guid: c18c59bed3728024793033ee964b4f2f,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 903959295}
     - target: {fileID: 8880859635586490934, guid: c18c59bed3728024793033ee964b4f2f,
         type: 3}
       propertyPath: vCamera
@@ -9155,3 +9160,6 @@ SceneRoots:
   - {fileID: 688395911}
   - {fileID: 1286645950}
   - {fileID: 1074908994}
+  - {fileID: 243729633}
+  - {fileID: 935749899}
+  - {fileID: 1221106431}
