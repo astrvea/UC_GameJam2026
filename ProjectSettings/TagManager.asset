@@ -11,6 +11,7 @@ TagManager:
   - Climbable
   - Ladder
   - Bouncy
+  - LadderEnd
   layers:
   - Default
   - TransparentFX
