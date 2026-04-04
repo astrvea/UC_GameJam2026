@@ -21,40 +21,34 @@ public class PageFlip : MonoBehaviour
         for (int i = 0; i < pages.Length; i++)
             pages[i].gameObject.SetActive(i == 0);
 
-        ShowLayout();
         UpdateArrows();
     }
 
     void FlipRight()
     {
         // show next pages
-        if (currentIndex + 2 >= pages.Length - 1) return;
-        currentIndex += 2;
+        if (currentIndex >= pages.Length - 1) return;
+        pages[currentIndex].gameObject.SetActive(false);
+        currentIndex++;
+        pages[currentIndex].gameObject.SetActive(true);
 
-        ShowLayout();
         UpdateArrows();
     }
 
     void FlipLeft()
     {
         // show previous pages
-        if (currentIndex -2 < 0) return;
-        currentIndex -= 2;
+        if (currentIndex <= 0) return;
+        pages[currentIndex].gameObject.SetActive(false);
+        currentIndex--;
+        pages[currentIndex].gameObject.SetActive(true);
 
-        ShowLayout();
         UpdateArrows();
-    }
-
-    void ShowLayout()
-    {
-        // shows current two page layout
-        for (int i = 0; i < pages.Length; i++)
-            pages[i].gameObject.SetActive(i == currentIndex || i == currentIndex + 1);
     }
 
     void UpdateArrows()
     {
         leftButton.interactable = currentIndex > 0;
-        rightButton.interactable = currentIndex + 2 < pages.Length;
+        rightButton.interactable = currentIndex < pages.Length - 1;
     }
 }
