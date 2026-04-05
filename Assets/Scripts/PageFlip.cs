@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PageFlip : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PageFlip : MonoBehaviour
     public Button rightButton;
     public Button leftButton;
 
-    private int currentIndex = 0;
+    [SerializeField] private int currentIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -50,5 +51,24 @@ public class PageFlip : MonoBehaviour
     {
         leftButton.interactable = currentIndex > 0;
         rightButton.interactable = currentIndex < pages.Length - 1;
+        CheckFinalPage();
+    }
+
+    void CheckFinalPage()
+    {
+        if (currentIndex == pages.Length - 1)
+        {
+            StartCoroutine(FinishBook());
+        }
+        else
+        {
+            StopCoroutine(FinishBook());
+        }
+    }
+
+    IEnumerator FinishBook()
+    {
+        yield return new WaitForSeconds(3f);
+        FindFirstObjectByType<SceneManager>().StoryBook(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }
