@@ -28,6 +28,7 @@ public class PageFlip : MonoBehaviour
     void FlipRight()
     {
         // show next pages
+        Debug.Log("pressed right");
         if (currentIndex >= pages.Length - 1) return;
         pages[currentIndex].gameObject.SetActive(false);
         currentIndex++;
@@ -39,6 +40,7 @@ public class PageFlip : MonoBehaviour
     void FlipLeft()
     {
         // show previous pages
+        Debug.Log("pressed");
         if (currentIndex <= 0) return;
         pages[currentIndex].gameObject.SetActive(false);
         currentIndex--;
