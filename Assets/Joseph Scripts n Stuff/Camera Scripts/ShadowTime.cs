@@ -8,6 +8,8 @@ public class ShadowTime : MonoBehaviour
 
     public CameraSwap camSwap;
 
+    public GameObject playerSprite;
+
 
     public void Update()
     {
@@ -18,6 +20,8 @@ public class ShadowTime : MonoBehaviour
 
             //ShadowGo = true;
             camSwap.hasMoved = false;
+
+            playerSprite.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && ShadowGo == true)
@@ -28,6 +32,8 @@ public class ShadowTime : MonoBehaviour
 
             ShadowGo = false;
             camSwap.hasMoved = false;
+
+            playerSprite.transform.rotation *= Quaternion.Euler(-30, -135, 0);
         }
 
  

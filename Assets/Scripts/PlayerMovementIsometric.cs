@@ -14,6 +14,15 @@ public class PlayerMovementIsometric : MonoBehaviour
     private GameObject climbingObject;
     public ShadowTime St;
 
+    public Animator _animator;
+
+    private const string _horizontal = "Horizontal";
+    private const string _vertical = "Vertical";
+    private const string _LastHorizontal = "LastHorizontal";
+    private const string _LastVertical = "LastVertical";
+
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,6 +36,24 @@ public class PlayerMovementIsometric : MonoBehaviour
         if(St.ShadowGo == false && !isClimbing){
             GatherInput();
             Look();
+        }
+
+        _animator.SetFloat(_horizontal, playerInput.x);
+        _animator.SetFloat(_vertical, playerInput.z);
+
+        if (playerInput != Vector3.zero) 
+        {
+            _animator.SetFloat(_LastHorizontal, playerInput.x);
+            _animator.SetFloat(_LastVertical, playerInput.z);
+        }
+
+        if (isClimbing == true)
+        {
+            _animator.SetBool("animClimb", true);
+        }
+        else 
+        {
+            _animator.SetBool("animClimb", false);
         }
     }
 
