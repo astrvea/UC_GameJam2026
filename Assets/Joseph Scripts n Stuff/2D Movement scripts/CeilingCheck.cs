@@ -6,6 +6,8 @@ public class CeilingCheck : MonoBehaviour
 {
 
     public BunnyMovement bm;
+
+    public GroundChecking Gc;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +26,12 @@ public class CeilingCheck : MonoBehaviour
         {
             bm.isBonked = true;
         }
+
+        if (other.CompareTag("Lantern")) 
+        {
+            Gc.knockdownLantern = true;
+        }
     }
+
+
 }

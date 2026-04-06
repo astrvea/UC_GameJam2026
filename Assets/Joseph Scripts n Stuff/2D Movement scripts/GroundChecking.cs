@@ -18,6 +18,17 @@ public class GroundChecking : MonoBehaviour
     public Rigidbody bnuuy;
 
     public float bounceForce;
+
+    public GameObject lanternShadow;
+    public Rigidbody lanternRb;
+
+    public GameObject lantern;
+
+    public float bumpForce;
+    public float lanternFall;
+
+    public bool lanternKnocked;
+    public bool knockdownLantern;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +47,11 @@ public class GroundChecking : MonoBehaviour
         if (startCoyotetime == false) 
         {
             bm.coyoteTime = bm.coyoteTimeReset;
+        }
+
+        if (knockdownLantern == true && lanternKnocked == false) 
+        {
+            StartCoroutine(LanternKnockdown());
         }
 
         
@@ -65,6 +81,14 @@ public class GroundChecking : MonoBehaviour
             bnuuy.AddForce(0, bounceForce, 0, ForceMode.Impulse);
 
         }
+
+
+        if (other.CompareTag("Lantern")) 
+        {
+
+            knockdownLantern = true;
+            //StartCoroutine(LanternKnockdown());
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -74,6 +98,21 @@ public class GroundChecking : MonoBehaviour
             startCoyotetime = true;
             bm.isGrounded = false;
         }
+    }
+
+
+
+    IEnumerator LanternKnockdown() 
+    {
+        
+        yield return new WaitForSeconds(0.3f);
+        lantern.GetComponent<Rigidbody>().useGravity = true;
+        lanternRb.AddForce(0, bumpForce, 0, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.02f);
+        lanternRb.AddForce(0, -lanternFall, 0, ForceMode.Impulse);
+        lanternKnocked = true;
+
+
     }
 
     

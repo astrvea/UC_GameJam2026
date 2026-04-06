@@ -14,6 +14,7 @@ TagManager:
   - MacGuffin
   - LadderEnd
   - Fade
+  - Lantern
   layers:
   - Default
   - TransparentFX
