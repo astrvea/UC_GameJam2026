@@ -33,5 +33,13 @@ public class CeilingCheck : MonoBehaviour
         }
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("shadowCeiling")) 
+        {
+            bm.isBonked = false;
+        }
+    }
+
 
 }

@@ -213,7 +213,7 @@ public class BunnyMovement : MonoBehaviour
             
             }
 
-            if (jumpTime <= 0f || isBonked == true) 
+            if (jumpTime <= 0f || isBonked == true && !isGrounded) 
             {
                 isJumping = false;
             }

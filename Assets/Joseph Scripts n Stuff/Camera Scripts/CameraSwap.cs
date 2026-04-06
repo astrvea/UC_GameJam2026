@@ -85,12 +85,12 @@ public class CameraSwap : MonoBehaviour
             vCamera.Follow = myShadow.transform;
             vCamera.LookAt = myShadow.transform;
 
-            if (grabber.isGrabbed == true) 
-            {
+            //if (grabber.isGrabbed == true) 
+            //{
 
-                itemShadow.SetActive(true);
+                //itemShadow.SetActive(true);
 
-            }
+            //}
 
             
         }
@@ -116,7 +116,7 @@ public class CameraSwap : MonoBehaviour
             vCamera.LookAt = player.transform;
 
            
-                itemShadow.SetActive(false);
+                //itemShadow.SetActive(false);
             
 
 

@@ -65,7 +65,7 @@ public class GroundChecking : MonoBehaviour
             bm.jumpTime = bm.jumpReset;
             bm.coyoteTime = bm.coyoteTimeReset;
             startCoyotetime = false;
-            bm.isBonked = false;
+            //bm.isBonked = false;
             bm.isGrounded = true;
             //bm.animControl.SetBool("isFalling", false);
         }

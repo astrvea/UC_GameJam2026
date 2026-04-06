@@ -35,7 +35,7 @@ public class LowerLadder : MonoBehaviour
             
         }
 
-        if (ladder.transform.position.y <= 2.5) 
+        if (ladder.transform.position.y <= 2.05) 
         {
 
             ladderRb.constraints = RigidbodyConstraints.FreezeAll;
