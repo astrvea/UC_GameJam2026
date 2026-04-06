@@ -64,7 +64,7 @@ public class PageFlip : MonoBehaviour
         }
         else
         {
-            StopCoroutine(FinishBook());
+            StopAllCoroutines();
         }
     }
 
