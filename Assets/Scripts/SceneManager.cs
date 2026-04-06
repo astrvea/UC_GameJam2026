@@ -15,10 +15,13 @@ public class SceneManager : MonoBehaviour
     {
         if (name == "intro")
         {
-            StartCoroutine(LoadGameScene("level 1"));
+            StartCoroutine(LoadGameScene("intro-to-level"));
         }else if (name == "epilogue")
         {
             StartCoroutine(LoadGameScene("credits"));
+        }else if (name == "intro-to-level")
+        {
+            StartCoroutine(LoadGameScene("level 1"));
         }
     }
 
