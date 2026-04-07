@@ -12,24 +12,25 @@ public class LevelText : MonoBehaviour
     public TextMeshProUGUI levelText;
     public string[] introPhrases =
     {
+        "Press E to progress dialogue...",
+        "It is said that many many years ago, a rabbit became a companion of the moon.",
+        "Once an inhabitant of the earth, the rabbit's kindness and selfishness was noticed by the skies and was granted eternal life among the stars.",
+        "It can be seen to this day, living as a shadow across the moon's surface."
+    };
+    public string[] phrases = {
         "It is said that many many years ago, a rabbit had a hungry fluffy companion on the moon.",
         "Once an inhabitant of the earth, the rabbit was guided by a light source so it could find its way.",
         "The rabbit dreamed of natural phenomenons, such as..."
-    };
-    public string[] phrases = {
-        "We're going on a trip in our favorite rocketship :DDD"
     }; // or whatever exposition phrases we wanna use
     public TextEffect textEffect;
-    public GameObject player;
     public Effect_Color typewriter;
-    private int currPhrase;
+    [SerializeField] private int currPhrase;
     private bool isTalking = false;
     private string[] whichPhrases;
 
     // Start is called before the first frame update
     void Start()
     {
-        levelText = this.GetComponent<TextMeshProUGUI>();
         currPhrase = -1;
         textEffect.StartManualEffect("typewriter");
         switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
@@ -58,6 +59,16 @@ public class LevelText : MonoBehaviour
         textEffect.StopManualEffects();
         levelText.ForceMeshUpdate();
         isTalking = false;
+        StartCoroutine(HideText());
+    }
+
+    IEnumerator HideText()
+    {
+        yield return new WaitForSeconds(2f);
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "level 1"){
+            levelText.gameObject.SetActive(false);
+            levelText.text = "";
+        }
     }
 
     public void FinishedSentence()
@@ -67,14 +78,13 @@ public class LevelText : MonoBehaviour
 
     public void Continue()
     {
+        levelText.gameObject.SetActive(true);
         if(!isTalking){
             currPhrase++;
             isTalking = true;
             if (currPhrase > whichPhrases.Length - 1)
             {
-                if(player){
-                    player.GetComponent<PlayerMovementIsometric>().enabled = true;
-                }
+                isTalking = false;
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "intro-to-level")
                 {
                     FindFirstObjectByType<SceneManager>().StoryBook(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
@@ -86,9 +96,6 @@ public class LevelText : MonoBehaviour
                 }
             }else{
                 levelText.text = whichPhrases[currPhrase];
-                if(player){
-                    player.GetComponent<PlayerMovementIsometric>().enabled = false;
-                }
                 textEffect.Refresh();
                 textEffect.StartManualEffect("typewriter");
             }
