@@ -12,9 +12,9 @@ public class LevelText : MonoBehaviour
     public TextMeshProUGUI levelText;
     public string[] introPhrases =
     {
-        "It is said that many many years ago, a rabbit became a companion of the moon.",
-        "Once an inhabitant of the earth, the rabbit's kindness and selfishness was noticed by the skies and was granted eternal life among the stars.",
-        "It can be seen to this day, living as a shadow across the moon's surface."
+        "It is said that many many years ago, a rabbit had a hungry fluffy companion on the moon.",
+        "Once an inhabitant of the earth, the rabbit was guided by a light source so it could find its way.",
+        "The rabbit dreamed of natural phenomenons, such as..."
     };
     public string[] phrases = {
         "We're going on a trip in our favorite rocketship :DDD"
