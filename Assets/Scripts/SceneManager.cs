@@ -49,10 +49,19 @@ public class SceneManager : MonoBehaviour
         }
         blackScreen.gameObject.transform.parent.GetComponent<Canvas>().sortingOrder = -1;
     }
+
+    private IEnumerator GoBackToMainMenu()
+    {
+        yield return new WaitForSeconds(30f);
+        StartCoroutine(LoadGameScene("MainMenu"));
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "credits")
+        {
+            StartCoroutine(GoBackToMainMenu());
+        }
     }
 
     // Update is called once per frame
