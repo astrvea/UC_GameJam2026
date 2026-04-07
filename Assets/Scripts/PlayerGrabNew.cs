@@ -11,6 +11,7 @@ public class PlayerGrabNew : MonoBehaviour
     public LayerMask grabbableLayer;
     [SerializeField] public float grabRange = 50f;
     [SerializeField] public float highDist = 2f;
+    private Vector3 pivot;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class PlayerGrabNew : MonoBehaviour
     {
         if (grabbedObj)
         {
-            grabbedObj.transform.position = grabArea.position;
+            grabbedObj.transform.position = grabArea.position + pivot;
         }
     }
 
@@ -59,7 +60,7 @@ public class PlayerGrabNew : MonoBehaviour
         // check to see if the player actually clicked anything
         if (Physics.Raycast(cameraRay, out cameraHit, Mathf.Infinity, grabbableLayer))
         {
-            GrabbableObject grab = cameraHit.collider.GetComponent<GrabbableObject>();
+            GrabbableObject grab = cameraHit.collider.GetComponentInParent<GrabbableObject>();
             Debug.DrawLine(cameraRay.origin, cameraHit.point, Color.red);
             Debug.Log(cameraHit.collider.name + " first hit");
             if (!grab || grab.transform.position.y > player.transform.position.y + highDist)
@@ -80,10 +81,10 @@ public class PlayerGrabNew : MonoBehaviour
         if (Physics.Raycast(player.transform.position, dirToObj, out cameraHit, Vector3.Distance(player.transform.position, targetWorldPoint) * 2, grabbableLayer))
         {
             Debug.Log(cameraHit.collider.name);
-            if (cameraHit.collider.GetComponent<GrabbableObject>())
+            if (cameraHit.collider.GetComponentInParent<GrabbableObject>())
             {
                 Debug.Log("Grabbable object found");
-                grabObj(cameraHit.collider.gameObject);
+                grabObj(cameraHit.collider.gameObject.transform.parent.gameObject);
             }
             else
             {
@@ -99,25 +100,28 @@ public class PlayerGrabNew : MonoBehaviour
         if (grabbedObj)
         {
             // swap the objects
-            grabbedObj.GetComponent<Collider>().isTrigger = false;
+            // grabbedObj.GetComponent<Collider>().isTrigger = false;
             grabbedObj.transform.position = obj.transform.position;
             grabbedObj = obj;
-            grabbedObj.GetComponent<Collider>().isTrigger = true;
+            // grabbedObj.GetComponent<Collider>().isTrigger = true;
             grabbedObj.transform.position = grabArea.position;
         }
         else
         {
             // set the grabbed object
             grabbedObj = obj;
-            grabbedObj.GetComponent<Collider>().isTrigger = true;
+            // grabbedObj.GetComponent<Collider>().isTrigger = true;
             grabbedObj.transform.position = grabArea.position;
         }
+
+        pivot = grabbedObj.transform.position - grabArea.position;
     }
 
     void dropObject()
     {
         // drop the object by setting grabbedObj to null
-        grabbedObj.GetComponent<Collider>().isTrigger = false;
+        // grabbedObj.GetComponent<Collider>().isTrigger = false;
         grabbedObj = null;
+        pivot = Vector3.zero;
     }
 }
