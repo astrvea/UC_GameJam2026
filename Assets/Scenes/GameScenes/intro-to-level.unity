@@ -503,6 +503,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1588315837517082680, guid: 764d345fde91b914982b925b2f611812,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 950
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588315837517082680, guid: 764d345fde91b914982b925b2f611812,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 650
+      objectReference: {fileID: 0}
     - target: {fileID: 2069608141118095258, guid: 764d345fde91b914982b925b2f611812,
         type: 3}
       propertyPath: m_ReferenceResolution.x
