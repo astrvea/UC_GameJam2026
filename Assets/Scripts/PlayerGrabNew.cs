@@ -9,7 +9,9 @@ public class PlayerGrabNew : MonoBehaviour
     public GameObject grabbedObj;
     public GameObject player;
     public LayerMask grabbableLayer;
-    [SerializeField] public float grabRange = 50f;
+    public AudioSource audioPlayer;
+    public AudioClip grabSound;
+    [SerializeField] public float grabRange = 10f;
     [SerializeField] public float highDist = 2f;
     private Vector3 pivot;
 
@@ -52,13 +54,13 @@ public class PlayerGrabNew : MonoBehaviour
         // Ray cameraRay = new Ray(mainCam.transform.position, (worldPoint - mainCam.transform.position).normalized);
         // Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction * 100, Color.blue);
         Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(cameraRay.origin, cameraRay.direction * 50, Color.red);
+        Debug.DrawRay(cameraRay.origin, cameraRay.direction * grabRange, Color.red);
 
         Vector3 targetWorldPoint = new Vector3();
         RaycastHit cameraHit;
 
         // check to see if the player actually clicked anything
-        if (Physics.Raycast(cameraRay, out cameraHit, Mathf.Infinity, grabbableLayer))
+        if (Physics.Raycast(cameraRay, out cameraHit, grabRange, grabbableLayer))
         {
             GrabbableObject grab = cameraHit.collider.GetComponentInParent<GrabbableObject>();
             Debug.DrawLine(cameraRay.origin, cameraHit.point, Color.red);
@@ -115,6 +117,9 @@ public class PlayerGrabNew : MonoBehaviour
         }
 
         pivot = grabbedObj.transform.position - grabArea.position;
+
+        audioPlayer.clip = grabSound;
+        audioPlayer.Play();
     }
 
     void dropObject()
