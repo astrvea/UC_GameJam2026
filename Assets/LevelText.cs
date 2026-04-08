@@ -106,7 +106,10 @@ public class LevelText : MonoBehaviour
         }
         else
         {
-            UpdateTalking();
+            textEffect.StopManualEffects();
+            levelText.text = whichPhrases[currPhrase];
+            levelText.ForceMeshUpdate();
+            isTalking = false;
         }
     }
 }
