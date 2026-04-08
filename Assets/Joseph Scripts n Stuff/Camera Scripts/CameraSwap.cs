@@ -11,9 +11,9 @@ public class CameraSwap : MonoBehaviour
 
     
     public ShadowTime St;
-    public float orgY;
-    public float orgX;
-    public float orgZ;
+    //public float orgY;
+    //public float orgX;
+    //public float orgZ;
     public Vector3 Offset;
     public Vector3 OrgStart;
     public float speed;
@@ -26,28 +26,32 @@ public class CameraSwap : MonoBehaviour
 
     public Vector3 targetLocation;
 
-    public CinemachineVirtualCamera vCamera;
+    //public CinemachineVirtualCamera vCamera;
+
+    public CinemachineVirtualCamera virtCam;
+
+    public GameObject vCamera;
 
     public bool hasMoved = false;
 
-    public GrabItem grabber;
+    //public GrabItem grabber;
 
-    public GameObject itemShadow;
+    //public GameObject itemShadow;
 
     public GameObject player;
     
 
     public void Start()
     {
-        orgY = Camera.main.transform.rotation.y;
-        orgX = Camera.main.transform.rotation.x;
-        orgZ = Camera.main.transform.rotation.z;
+        //orgY = Camera.main.transform.rotation.y;
+        //orgX = Camera.main.transform.rotation.x;
+        //orgZ = Camera.main.transform.rotation.z;
 
         targetRot = Quaternion.Euler(15, 90, 0);
         orgRot = Quaternion.Euler(30, 45, 0);
 
       
-        vCamera = GetComponent<CinemachineVirtualCamera>();
+        //vCamera = GetComponent<CinemachineVirtualCamera>();
 
 
         
@@ -82,8 +86,8 @@ public class CameraSwap : MonoBehaviour
 
             vCamera.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotSpeed * Time.deltaTime);
 
-            vCamera.Follow = myShadow.transform;
-            vCamera.LookAt = myShadow.transform;
+            virtCam.Follow = myShadow.transform;
+            virtCam.LookAt = myShadow.transform;
 
             //if (grabber.isGrabbed == true) 
             //{
@@ -112,12 +116,12 @@ public class CameraSwap : MonoBehaviour
             vCamera.transform.rotation = Quaternion.RotateTowards(transform.rotation, orgRot, rotSpeed * Time.deltaTime);
             Camera.main.orthographic = true;
 
-            vCamera.Follow = player.transform;
-            vCamera.LookAt = player.transform;
+            virtCam.Follow = player.transform;
+            virtCam.LookAt = player.transform;
 
-           
-                //itemShadow.SetActive(false);
-            
+
+            //itemShadow.SetActive(false);
+
 
 
 
