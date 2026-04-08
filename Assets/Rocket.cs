@@ -33,7 +33,7 @@ public class Rocket : MonoBehaviour
         BoxCollider box = GetComponent<BoxCollider>();
         Vector3 boxCenter = box.bounds.center;
         Vector3 boxSize = box.bounds.size;
-        Collider[] hitColls = Physics.OverlapBox(boxCenter, boxSize / 2f, Quaternion.identity, playerHand.grabbableLayer);
+        Collider[] hitColls = Physics.OverlapBox(boxCenter, boxSize / 4f, Quaternion.identity, playerHand.grabbableLayer);
         string hitNames = "";
         foreach (Collider col in hitColls)
         {
@@ -42,7 +42,7 @@ public class Rocket : MonoBehaviour
             {
                 continue;
             }
-            if (col.attachedRigidbody.GetComponent<GrabbableObject>().baseItem.name == "cat bowl")
+            if (col.attachedRigidbody.GetComponent<GrabbableObject>().baseItem.name == "catbowl")
             {
                 isCatBowlInRange = true;
             }
