@@ -1216,7 +1216,7 @@ PrefabInstance:
     - target: {fileID: 6951381473528671264, guid: d1969c434a0186a41b74eabf2eda24de,
         type: 3}
       propertyPath: introPhrases.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6951381473528671264, guid: d1969c434a0186a41b74eabf2eda24de,
         type: 3}
@@ -1242,6 +1242,11 @@ PrefabInstance:
     - target: {fileID: 6951381473528671264, guid: d1969c434a0186a41b74eabf2eda24de,
         type: 3}
       propertyPath: introPhrases.Array.data[4]
+      value: And return them to the rocket silhouette to fly away!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951381473528671264, guid: d1969c434a0186a41b74eabf2eda24de,
+        type: 3}
+      propertyPath: introPhrases.Array.data[5]
       value: The moon is but a hop away!
       objectReference: {fileID: 0}
     - target: {fileID: 7466152597549348046, guid: d1969c434a0186a41b74eabf2eda24de,
