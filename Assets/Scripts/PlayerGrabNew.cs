@@ -103,15 +103,18 @@ public class PlayerGrabNew : MonoBehaviour
         {
             // swap the objects
             // grabbedObj.GetComponent<Collider>().isTrigger = false;
+            grabbedObj.GetComponent<Rigidbody>().detectCollisions = true;
             grabbedObj.transform.position = obj.transform.position;
             grabbedObj = obj;
             // grabbedObj.GetComponent<Collider>().isTrigger = true;
+            grabbedObj.GetComponent<Rigidbody>().detectCollisions = false;
             grabbedObj.transform.position = grabArea.position;
         }
         else
         {
             // set the grabbed object
             grabbedObj = obj;
+            grabbedObj.GetComponent<Rigidbody>().detectCollisions = false;
             // grabbedObj.GetComponent<Collider>().isTrigger = true;
             grabbedObj.transform.position = grabArea.position;
         }
@@ -126,6 +129,7 @@ public class PlayerGrabNew : MonoBehaviour
     {
         // drop the object by setting grabbedObj to null
         // grabbedObj.GetComponent<Collider>().isTrigger = false;
+        grabbedObj.GetComponent<Rigidbody>().detectCollisions = true;
         grabbedObj = null;
         pivot = Vector3.zero;
     }
