@@ -6,7 +6,7 @@ using TMPro;
 public class Rocket : MonoBehaviour
 {
     private PlayerGrabNew playerHand;
-    private float sphereRadius;
+    [SerializeField] public float sphereRadius = 3f;
     private bool isCatBowlInRange;
     private bool isVolcanoInRange;
     private bool isLanternInRange;
@@ -15,7 +15,6 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         playerHand = FindObjectOfType<PlayerGrabNew>();
-        sphereRadius = transform.localScale.x / 2;
     }
 
     // Update is called once per frame
@@ -36,15 +35,20 @@ public class Rocket : MonoBehaviour
         string hitNames = "";
         foreach (Collider col in hitColls)
         {
-            if (col.GetComponent<GrabbableObject>().baseItem.name == "cat bowl")
+            Debug.Log(col.attachedRigidbody.name + " hit");
+            if (col.attachedRigidbody.GetComponent<GrabbableObject>() == null)
+            {
+                return;
+            }
+            if (col.attachedRigidbody.GetComponent<GrabbableObject>().baseItem.name == "cat bowl")
             {
                 isCatBowlInRange = true;
             }
-            else if (col.GetComponent<GrabbableObject>().baseItem.name == "volcano")
+            else if (col.attachedRigidbody.GetComponent<GrabbableObject>().baseItem.name == "volcano")
             {
                 isVolcanoInRange = true;
             }
-            else if (col.GetComponent<GrabbableObject>().baseItem.name == "lantern")
+            else if (col.attachedRigidbody.GetComponent<GrabbableObject>().baseItem.name == "lantern")
             {
                 isLanternInRange = true;
             }

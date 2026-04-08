@@ -54,7 +54,7 @@ public class PlayerGrabNew : MonoBehaviour
         // Ray cameraRay = new Ray(mainCam.transform.position, (worldPoint - mainCam.transform.position).normalized);
         // Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction * 100, Color.blue);
         Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(cameraRay.origin, cameraRay.direction * grabRange, Color.red);
+        Debug.DrawRay(cameraRay.origin, cameraRay.direction * grabRange, Color.red, 2);
 
         Vector3 targetWorldPoint = new Vector3();
         RaycastHit cameraHit;
@@ -62,9 +62,9 @@ public class PlayerGrabNew : MonoBehaviour
         // check to see if the player actually clicked anything
         if (Physics.Raycast(cameraRay, out cameraHit, grabRange, grabbableLayer))
         {
-            GrabbableObject grab = cameraHit.collider.GetComponentInParent<GrabbableObject>();
-            Debug.DrawLine(cameraRay.origin, cameraHit.point, Color.red);
-            Debug.Log(cameraHit.collider.name + " first hit");
+            GrabbableObject grab = cameraHit.collider.attachedRigidbody.GetComponent<GrabbableObject>();
+            Debug.DrawLine(cameraRay.origin, cameraHit.point, Color.blue, 2);
+            Debug.Log(cameraHit.collider.attachedRigidbody.name + " first hit");
             if (!grab || grab.transform.position.y > player.transform.position.y + highDist)
             {
                 return;
@@ -82,11 +82,11 @@ public class PlayerGrabNew : MonoBehaviour
         // check to see if there's something in between the player and the grabbable
         if (Physics.Raycast(player.transform.position, dirToObj, out cameraHit, Vector3.Distance(player.transform.position, targetWorldPoint) * 2, grabbableLayer))
         {
-            Debug.Log(cameraHit.collider.name);
-            if (cameraHit.collider.GetComponentInParent<GrabbableObject>())
+            Debug.Log(cameraHit.collider.attachedRigidbody.name);
+            if (cameraHit.collider.attachedRigidbody.GetComponent<GrabbableObject>())
             {
                 Debug.Log("Grabbable object found");
-                grabObj(cameraHit.collider.gameObject.transform.parent.gameObject);
+                grabObj(cameraHit.collider.attachedRigidbody.gameObject);
             }
             else
             {
