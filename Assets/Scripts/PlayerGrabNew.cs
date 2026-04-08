@@ -11,7 +11,7 @@ public class PlayerGrabNew : MonoBehaviour
     public LayerMask grabbableLayer;
     public AudioSource audioPlayer;
     public AudioClip grabSound;
-    [SerializeField] public float grabRange = 10f;
+    [SerializeField] public float grabRange = 3f;
     [SerializeField] public float highDist = 2f;
     private Vector3 pivot;
 
@@ -60,7 +60,7 @@ public class PlayerGrabNew : MonoBehaviour
         RaycastHit cameraHit;
 
         // check to see if the player actually clicked anything
-        if (Physics.Raycast(cameraRay, out cameraHit, grabRange, grabbableLayer))
+        if (Physics.Raycast(cameraRay, out cameraHit, Mathf.Infinity, grabbableLayer))
         {
             GrabbableObject grab = cameraHit.collider.attachedRigidbody.GetComponent<GrabbableObject>();
             Debug.DrawLine(cameraRay.origin, cameraHit.point, Color.blue, 2);
@@ -80,7 +80,7 @@ public class PlayerGrabNew : MonoBehaviour
         Vector3 dirToObj = (targetWorldPoint - player.transform.position).normalized;
 
         // check to see if there's something in between the player and the grabbable
-        if (Physics.Raycast(player.transform.position, dirToObj, out cameraHit, Vector3.Distance(player.transform.position, targetWorldPoint) * 2, grabbableLayer))
+        if (Physics.Raycast(player.transform.position, dirToObj, out cameraHit, grabRange, grabbableLayer))
         {
             Debug.Log(cameraHit.collider.attachedRigidbody.name);
             if (cameraHit.collider.attachedRigidbody.GetComponent<GrabbableObject>())

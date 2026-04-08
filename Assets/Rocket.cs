@@ -6,7 +6,6 @@ using TMPro;
 public class Rocket : MonoBehaviour
 {
     private PlayerGrabNew playerHand;
-    [SerializeField] public float sphereRadius = 3f;
     private bool isCatBowlInRange;
     private bool isVolcanoInRange;
     private bool isLanternInRange;
@@ -31,14 +30,17 @@ public class Rocket : MonoBehaviour
         isCatBowlInRange = false;
         isVolcanoInRange = false;
         isLanternInRange = false;
-        Collider[] hitColls = Physics.OverlapSphere(transform.position, sphereRadius, playerHand.grabbableLayer);
+        BoxCollider box = GetComponent<BoxCollider>();
+        Vector3 boxCenter = box.bounds.center;
+        Vector3 boxSize = box.bounds.size;
+        Collider[] hitColls = Physics.OverlapBox(boxCenter, boxSize / 2f, Quaternion.identity, playerHand.grabbableLayer);
         string hitNames = "";
         foreach (Collider col in hitColls)
         {
             Debug.Log(col.attachedRigidbody.name + " hit");
             if (col.attachedRigidbody.GetComponent<GrabbableObject>() == null)
             {
-                return;
+                continue;
             }
             if (col.attachedRigidbody.GetComponent<GrabbableObject>().baseItem.name == "cat bowl")
             {
