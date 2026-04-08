@@ -13,6 +13,12 @@ public class LowerLadder : MonoBehaviour
 
     public GameObject colliderBoxes;
 
+    public float dropTime;
+
+    public GameObject ladderEndPos;
+
+    public LadderShadowColOff shadowOff;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +28,16 @@ public class LowerLadder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (ladder.transform.position.y <= ladderEndPos.transform.position.y) 
         
+        {
+
+            shadowOff.turnOff = false;
+
+        }
+
+
     }
 
     public void FixedUpdate()
@@ -31,18 +46,20 @@ public class LowerLadder : MonoBehaviour
         {
 
             ladderRb.useGravity = true;
-            ladderRb.isKinematic = true;
+            
+            StartCoroutine(incDrop());
             
         }
 
-        if (ladder.transform.position.y <= 2.05) 
+        if (ladder.transform.position.y <= ladderEndPos.transform.position.y) 
         {
 
-            ladderRb.constraints = RigidbodyConstraints.FreezeAll;
+            
             ladderPushed = false;
             colliderBoxes.SetActive(false);
             ladderRb.useGravity = false;
-            ladderRb.isKinematic = false;
+            ladderRb.constraints = RigidbodyConstraints.FreezeAll;
+            shadowOff.turnOff = false;
         }
     }
 
@@ -55,5 +72,15 @@ public class LowerLadder : MonoBehaviour
             colliderBoxes.SetActive(false);
             ladderRb.constraints = RigidbodyConstraints.FreezeAll;
         }
+    }
+
+    IEnumerator incDrop() 
+    
+    {
+
+        yield return new WaitForSeconds(dropTime);
+        ladderRb.useGravity = false;
+        ladderRb.isKinematic = false;
+        ladderPushed = false;
     }
 }
