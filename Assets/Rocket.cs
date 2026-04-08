@@ -13,6 +13,9 @@ public class Rocket : MonoBehaviour
     public GameObject middleRocket;
     public GameObject bottomRocket;
     public GameObject wholeRocket;
+    public AudioSource audioSource;
+    public AudioClip rocketSound;
+    private int finishedLevel = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,12 @@ public class Rocket : MonoBehaviour
         if (playerHand.grabbedObj == null)
         {
             checkArea();
+        }
+        if (finishedLevel == 1)
+        {
+            audioSource.clip = rocketSound;
+            audioSource.Play();
+            StartCoroutine(finishLevel());
         }
     }
 
@@ -92,6 +101,7 @@ public class Rocket : MonoBehaviour
             case "wholeRocket":
                 c = wholeRocket.GetComponent<SpriteRenderer>().color;
                 sr = wholeRocket.GetComponent<SpriteRenderer>();
+                finishedLevel++; // jank way of making it run once and only once
                 break;
         }
         while (c.a < 1)
@@ -127,5 +137,11 @@ public class Rocket : MonoBehaviour
             sr.color = c;
             yield return null;
         }
+    }
+
+    IEnumerator finishLevel()
+    {
+        yield return new WaitForSeconds(5f);
+        FindFirstObjectByType<SceneManager>().LoadEpilogue();
     }
 }
