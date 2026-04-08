@@ -92,8 +92,11 @@ public class LevelText : MonoBehaviour
                 }
                 else
                 {
-                    levelText.gameObject.SetActive(false);
-                    levelText.text = "";
+                    currPhrase = 0;
+                    levelText.text = whichPhrases[currPhrase];
+                    textEffect.Refresh();
+                    textEffect.StartManualEffect("typewriter");
+                    isTalking = true;
                 }
             }else{
                 levelText.text = whichPhrases[currPhrase];
